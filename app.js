@@ -106,26 +106,49 @@ Important guidelines:
 /**
  * Call Gemini API
  */
+/**
+ * Call Gemini API
+ * Supports both direct client-side (local dev) and Vercel serverless (production)
+ */
 async function callGeminiAPI(prompt) {
-    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            contents: [{
-                parts: [{
-                    text: prompt
-                }]
-            }],
-            generationConfig: {
-                temperature: 0.7,
-                topK: 40,
-                topP: 0.95,
-                maxOutputTokens: 1024,
-            }
-        })
-    });
+    const payload = {
+        contents: [{
+            parts: [{
+                text: prompt
+            }]
+        }],
+        generationConfig: {
+            temperature: 0.7,
+            topK: 40,
+            topP: 0.95,
+            maxOutputTokens: 1024,
+        }
+    };
+
+    // Determine environment
+    const isLocal = window.location.hostname === 'localhost' || window.location.protocol === 'file:';
+
+    let url, options;
+
+    if (isLocal && GEMINI_API_KEY && GEMINI_API_KEY !== 'YOUR_API_KEY_HERE') {
+        // Local Dev: Call Google Direct
+        url = `${GEMINI_API_URL}?key=${GEMINI_API_KEY}`;
+        options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        };
+    } else {
+        // Production (Vercel): Call Internal API Proxy
+        url = '/api/generate';
+        options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        };
+    }
+
+    const response = await fetch(url, options);
 
     if (!response.ok) {
         const errorData = await response.json();
