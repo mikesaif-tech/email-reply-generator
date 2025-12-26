@@ -1,5 +1,5 @@
 // ===== Configuration =====
-const GEMINI_API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your actual Gemini API key
+const GEMINI_API_KEY = 'AIzaSyCUWRJHhlvB18vuE18ZJXRfoUnGQXI_HCI'; // Replace with your actual Gemini API key
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
 // ===== State Management =====
@@ -39,8 +39,9 @@ async function generateResponse() {
     // Hide error if shown
     hideError();
 
-    // Check for API key
-    if (GEMINI_API_KEY === 'YOUR_API_KEY_HERE') {
+    // Check for API key (only strict check if running locally)
+    const isLocal = window.location.hostname === 'localhost' || window.location.protocol === 'file:';
+    if (isLocal && GEMINI_API_KEY === 'YOUR_API_KEY_HERE') {
         showError('Please add your Gemini API key in the app.js file. Get one at https://makersuite.google.com/app/apikey');
         return;
     }
