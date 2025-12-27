@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,11 @@
     <meta name="description" content="Generate professional email responses instantly with AI-powered assistance">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <!-- Header -->
@@ -18,7 +21,8 @@
                 <div class="logo-section">
                     <div class="logo-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            <path
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                     </div>
                     <div>
@@ -28,7 +32,8 @@
                 </div>
                 <button class="btn-reset" onclick="resetForm()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        <path
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                     </svg>
                     New Draft
                 </button>
@@ -49,11 +54,9 @@
                         Incoming Email <span class="required">*</span>
                     </label>
                     <p class="helper-text">Paste the email text or the thread you are replying to.</p>
-                    <textarea 
-                        id="incomingEmail" 
+                    <textarea id="incomingEmail"
                         placeholder="Hi Team, hope you're doing well. Just checking in on the report..."
-                        rows="8"
-                    ></textarea>
+                        rows="8"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -61,11 +64,7 @@
                         What should your response say? <span class="required">*</span>
                     </label>
                     <p class="helper-text">E.g., 'Yes I can make the meeting', 'No I can't make it', etc.</p>
-                    <textarea 
-                        id="responseIntent" 
-                        placeholder="Tell the AI your basic intent..."
-                        rows="8"
-                    ></textarea>
+                    <textarea id="responseIntent" placeholder="Tell the AI your basic intent..." rows="8"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -85,14 +84,14 @@
 
                 <div id="errorMessage" class="error-message" style="display: none;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span id="errorText"></span>
                 </div>
 
                 <button class="btn-primary" onclick="generateResponse()" id="generateBtn">
                     <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        <path d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     <span>Craft Response</span>
                     <div class="spinner" style="display: none;"></div>
@@ -111,18 +110,21 @@
                     <div id="loadingState" class="state-container" style="display: none;">
                         <div class="loading-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
+                                <path
+                                    d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
                             </svg>
                         </div>
                         <h3>Analyzing Context...</h3>
-                        <p>Our AI is drafting the perfect <span id="loadingTone">business friendly</span> response for you.</p>
+                        <p>Our AI is drafting the perfect <span id="loadingTone">business friendly</span> response for
+                            you.</p>
                     </div>
 
                     <!-- Empty State -->
                     <div id="emptyState" class="state-container">
                         <div class="empty-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                <path
+                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                             </svg>
                         </div>
                         <h3>Ready to Draft</h3>
@@ -135,9 +137,11 @@
                             <label>Subject Line</label>
                             <div class="input-with-copy">
                                 <input type="text" id="resultSubject" readonly>
-                                <button class="btn-copy" onclick="copyToClipboard('resultSubject')" title="Copy Subject">
+                                <button class="btn-copy" onclick="copyToClipboard('resultSubject')"
+                                    title="Copy Subject">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                        <path
+                                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                                     </svg>
                                 </button>
                             </div>
@@ -148,7 +152,8 @@
                                 <label>Email Body</label>
                                 <button class="btn-copy-text" onclick="copyToClipboard('resultBody')">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                        <path
+                                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                                     </svg>
                                     Copy Body
                                 </button>
@@ -164,7 +169,8 @@
                         <p>Copy the response into your email and refine it to match your perfect tone.</p>
                     </div>
                     <svg class="tip-icon" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.477.859h4z"/>
+                        <path
+                            d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.477.859h4z" />
                     </svg>
                 </div>
             </section>
@@ -176,6 +182,8 @@
         </footer>
     </div>
 
+    <script src="config.js"></script>
     <script src="app.js"></script>
 </body>
+
 </html>

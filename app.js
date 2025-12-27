@@ -1,5 +1,5 @@
 // ===== Configuration =====
-const GEMINI_API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your actual Gemini API key
+const GEMINI_API_KEY = (typeof CONFIG !== 'undefined' && CONFIG.GEMINI_API_KEY) ? CONFIG.GEMINI_API_KEY : 'YOUR_API_KEY_HERE'; // Load from config.js or use placeholder
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
 // ===== State Management =====

@@ -1,4 +1,5 @@
 # EmailCraft AI - Email Response Generator
+Deployed at: https://email-responder-383157930282.us-central1.run.app
 
 A beautiful, modern web application that generates professional email responses using Google's Gemini AI.
 
